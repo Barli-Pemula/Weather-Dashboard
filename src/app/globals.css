@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased;
+  }
+
+  h1 {
+    @apply font-display font-black tracking-tight;
+  }
+
+  h2 {
+    @apply font-display font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Floating animation for doodle elements */
+  .animate-float-slow {
+    @apply animate-float;
+    animation-duration: 4s;
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+
+  /* Smooth gradient card */
+  .card-gradient {
+    @apply rounded-3xl p-8 shadow-xl border border-white/50;
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  /* Doodle divider line */
+  .doodle-line {
+    @apply relative h-1 bg-gradient-to-r from-transparent via-blue-300 to-transparent;
+  }
+
+  /* Professional button styles */
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-smooth shadow-lg hover:shadow-xl active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-xl font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-smooth shadow-md hover:shadow-lg active:scale-95;
+  }
+
+  /* Badge styles */
+  .badge {
+    @apply inline-block px-4 py-1.5 rounded-full font-bold text-sm shadow-md;
+  }
+
+  .badge-primary {
+    @apply badge bg-blue-500 text-white;
+  }
+
+  .badge-secondary {
+    @apply badge bg-slate-200 text-slate-700;
+  }
+
+  /* Subtle info box */
+  .info-box {
+    @apply rounded-2xl p-4 bg-white/60 backdrop-blur-sm border border-slate-100 shadow-sm;
+  }
+}
+
+/* Smooth page transitions */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+/* Doodle SVG styling */
+.doodle-svg {
+  @apply drop-shadow-sm opacity-40 pointer-events-none;
+}
+
+.doodle-svg-light {
+  @apply drop-shadow-sm opacity-10 pointer-events-none;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
