@@ -41,9 +41,9 @@ export default async function HomePage() {
 
         {/* Main temperature display */}
         <div className={`text-center z-10`}>
-          <div className={`text-10xl font-black tracking-tighter leading-none mb-4 drop-shadow-lg`}>
-            <span className={tempColors.text}>{formatTemp(temp)}</span>
-            <span className="text-5xl ml-2 align-super">°C</span>
+          <div className={`flex items-start justify-center gap-1 mb-4`}>
+            <span className={`${tempColors.text} text-9xl md:text-10xl font-black tracking-tighter leading-none drop-shadow-lg`}>{formatTemp(temp)}</span>
+            <span className="text-4xl md:text-5xl font-black mt-6 drop-shadow-lg text-slate-800">°C</span>
           </div>
 
           {/* Weather condition badge */}

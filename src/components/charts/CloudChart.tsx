@@ -19,8 +19,13 @@ interface CloudChartProps {
 
 export default function CloudChart({ data }: CloudChartProps) {
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <BarChart data={data} margin={{ top: 20, right: 10, left: -20, bottom: 0 }}>
+    <div className="w-full h-full flex flex-col">
+      <div className="px-4 pt-4 pb-2">
+        <h3 className="text-lg font-bold text-slate-700">☁️ Cloud Coverage</h3>
+      </div>
+      <div className="flex-1">
+      <ResponsiveContainer width="100%" height="100%">
+      <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
         <defs>
           <linearGradient id="cloudGradient" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#64748b" stopOpacity={1} />
@@ -51,5 +56,7 @@ export default function CloudChart({ data }: CloudChartProps) {
         <Bar dataKey="coverage" fill="url(#cloudGradient)" radius={[12, 12, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
+      </div>
+    </div>
   );
 }

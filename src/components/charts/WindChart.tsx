@@ -19,8 +19,13 @@ interface WindChartProps {
 
 export default function WindChart({ data }: WindChartProps) {
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data} margin={{ top: 20, right: 10, left: -20, bottom: 0 }}>
+    <div className="w-full h-full flex flex-col">
+      <div className="px-4 pt-4 pb-2">
+        <h3 className="text-lg font-bold text-slate-700">💨 Wind Speed</h3>
+      </div>
+      <div className="flex-1">
+      <ResponsiveContainer width="100%" height="100%">
+      <LineChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
         <defs>
           <linearGradient id="windGradient" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#0ea5e9" stopOpacity={0.4} />
@@ -60,5 +65,7 @@ export default function WindChart({ data }: WindChartProps) {
         />
       </LineChart>
     </ResponsiveContainer>
+      </div>
+    </div>
   );
 }
