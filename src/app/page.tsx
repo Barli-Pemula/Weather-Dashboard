@@ -22,7 +22,7 @@ export default async function HomePage() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
       {/* Hero Section - Main Temperature Display */}
       <section
-        className={`relative rounded-[3rem] p-12 md:p-16 bg-gradient-to-br ${gradientBg} border-4 border-white shadow-2xl overflow-hidden flex flex-col items-center justify-center min-h-[500px] md:min-h-[600px]`}
+        className={`relative rounded-[2rem] md:rounded-[3rem] p-8 md:p-16 bg-gradient-to-br ${gradientBg} border-4 border-white shadow-2xl overflow-hidden flex flex-col items-center justify-center min-h-[400px] md:min-h-[600px]`}
       >
         {/* Animated background element */}
         <div className="absolute inset-0 opacity-5 pointer-events-none">
@@ -37,49 +37,50 @@ export default async function HomePage() {
         </div>
 
         {/* Weather icon */}
-        <div className={`text-9xl mb-6 drop-shadow-lg animate-float`}>{weatherEmoji}</div>
+        {/* Weather icon */}
+        <div className={`text-6xl md:text-9xl mb-4 md:mb-6 drop-shadow-lg animate-float`}>{weatherEmoji}</div>
 
         {/* Main temperature display */}
-        <div className={`text-center z-10`}>
-          <div className={`flex items-start justify-center gap-1 mb-4`}>
-            <span className={`${tempColors.text} text-9xl md:text-10xl font-black tracking-tighter leading-none drop-shadow-lg`}>{formatTemp(temp)}</span>
-            <span className="text-4xl md:text-5xl font-black mt-6 drop-shadow-lg text-slate-800">°C</span>
+        <div className={`text-center z-10 mb-4 md:mb-6`}>
+          <div className={`flex items-baseline justify-center gap-2 md:gap-3`}>
+            <span className={`${tempColors.text} text-5xl md:text-7xl font-black tracking-tighter leading-none drop-shadow-lg`}>{formatTemp(temp)}</span>
+            <span className="text-2xl md:text-4xl font-black drop-shadow-lg text-slate-800">°C</span>
           </div>
 
           {/* Weather condition badge */}
-          <div className="mt-6 inline-block px-8 py-3 bg-white/80 backdrop-blur-md shadow-xl rounded-full border-2 border-white">
-            <p className="text-2xl font-bold text-slate-800">{weatherDesc}</p>
+          <div className="mt-4 md:mt-6 inline-block px-6 md:px-8 py-2 md:py-3 bg-white/80 backdrop-blur-md shadow-xl rounded-full border-2 border-white">
+            <p className="text-lg md:text-2xl font-bold text-slate-800">{weatherDesc}</p>
           </div>
         </div>
 
-        {/* Quick info badges - Positioned strategically */}
-        <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+        {/* Quick info badges - Positioned for mobile */}
+        <div className="w-full mt-6 md:mt-8 px-4 md:px-0 grid grid-cols-2 gap-3 md:gap-4 md:absolute md:bottom-8 md:left-8 md:right-8">
           {/* Wind */}
-          <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl p-4 flex flex-col items-center justify-center transform -rotate-2 hover:rotate-0 transition-all duration-300 hover:shadow-xl">
-            <Wind className="text-blue-500 mb-2" size={32} />
-            <div className={`text-2xl font-black ${tempColors.text}`}>{formatWindSpeed(wind)}</div>
-            <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">km/h Wind</div>
+          <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-xl md:rounded-2xl p-3 md:p-4 flex flex-col items-center justify-center transform -rotate-2 hover:rotate-0 transition-all duration-300 hover:shadow-xl">
+            <Wind className="text-blue-500 mb-1 md:mb-2" size={24} />
+            <div className={`text-lg md:text-2xl font-black ${tempColors.text}`}>{formatWindSpeed(wind)}</div>
+            <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-0.5 md:mt-1">Wind</div>
           </div>
 
           {/* Humidity */}
-          <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl p-4 flex flex-col items-center justify-center transform rotate-1 hover:rotate-0 transition-all duration-300 hover:shadow-xl">
-            <Droplets className="text-cyan-500 mb-2" size={32} />
-            <div className={`text-2xl font-black text-cyan-600`}>{formatTemp(humidity)}</div>
-            <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">% Humidity</div>
+          <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-xl md:rounded-2xl p-3 md:p-4 flex flex-col items-center justify-center transform rotate-1 hover:rotate-0 transition-all duration-300 hover:shadow-xl">
+            <Droplets className="text-cyan-500 mb-1 md:mb-2" size={24} />
+            <div className={`text-lg md:text-2xl font-black text-cyan-600`}>{formatTemp(humidity)}</div>
+            <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-0.5 md:mt-1">Humidity</div>
           </div>
 
           {/* Precipitation */}
-          <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl p-4 flex flex-col items-center justify-center transform -rotate-1 hover:rotate-0 transition-all duration-300 hover:shadow-xl">
-            <Gauge className="text-emerald-500 mb-2" size={32} />
-            <div className={`text-2xl font-black text-emerald-600`}>{formatTemp(precipitation)}</div>
-            <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">mm Rain</div>
+          <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-xl md:rounded-2xl p-3 md:p-4 flex flex-col items-center justify-center transform -rotate-1 hover:rotate-0 transition-all duration-300 hover:shadow-xl">
+            <Gauge className="text-emerald-500 mb-1 md:mb-2" size={24} />
+            <div className={`text-lg md:text-2xl font-black text-emerald-600`}>{formatTemp(precipitation)}</div>
+            <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-0.5 md:mt-1">Rain</div>
           </div>
 
           {/* Visibility (simulated) */}
-          <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl p-4 flex flex-col items-center justify-center transform rotate-2 hover:rotate-0 transition-all duration-300 hover:shadow-xl">
-            <Eye className="text-purple-500 mb-2" size={32} />
-            <div className={`text-2xl font-black text-purple-600`}>10</div>
-            <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">km View</div>
+          <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-xl md:rounded-2xl p-3 md:p-4 flex flex-col items-center justify-center transform rotate-2 hover:rotate-0 transition-all duration-300 hover:shadow-xl">
+            <Eye className="text-purple-500 mb-1 md:mb-2" size={24} />
+            <div className={`text-lg md:text-2xl font-black text-purple-600`}>10</div>
+            <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-0.5 md:mt-1">View</div>
           </div>
         </div>
       </section>

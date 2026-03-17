@@ -38,18 +38,19 @@ export default async function ForecastPage() {
       </header>
 
       {/* Temperature Trend Chart */}
-      <section className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl border-4 border-slate-50 relative overflow-hidden">
-        <div className="absolute -top-6 left-8 bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-2 rounded-2xl font-bold shadow-lg transform -rotate-3">
-          Temperature Trends 📈
+      <section className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
+        <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 md:px-8 py-4 md:py-6 flex items-center gap-3">
+          <span className="text-2xl">📈</span>
+          <h2 className="text-xl md:text-2xl font-bold">Temperature Trends</h2>
         </div>
-
-        <div className="h-96 w-full mt-8">
+        <div className="h-80 md:h-96 p-4 md:p-6">
           <ForecastChart data={chartData} variant="area" />
         </div>
-
-        <p className="text-center text-slate-500 text-sm mt-6 font-medium">
-          ✨ Smooth curves show 5-day temperature progression
-        </p>
+        <div className="px-6 md:px-8 py-4 bg-slate-50 border-t border-slate-100">
+          <p className="text-center text-sm text-slate-600 font-medium">
+            ✨ 5-day temperature progression with smooth trends
+          </p>
+        </div>
       </section>
 
       {/* 7-Day Daily Cards Grid */}

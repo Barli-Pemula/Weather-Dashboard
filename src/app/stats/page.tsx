@@ -98,34 +98,34 @@ export default async function StatsPage() {
       </section>
 
       {/* Cloud Cover Analysis */}
-      <section className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl border-4 border-slate-50 relative overflow-hidden">
-        <div className="absolute -top-6 left-8 bg-gradient-to-r from-slate-600 to-slate-800 text-white px-6 py-2 rounded-2xl font-bold shadow-lg transform -rotate-3 flex items-center gap-2">
-          <Cloud size={18} /> Cloud Coverage
+      <section className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
+        <div className="bg-gradient-to-r from-slate-600 to-slate-700 text-white px-6 md:px-8 py-4 md:py-6 flex items-center gap-3">
+          <Cloud size={24} />
+          <h2 className="text-xl md:text-2xl font-bold">Cloud Coverage</h2>
         </div>
-
-        <div className="h-96 w-full mt-8">
+        <div className="h-80 md:h-96 p-4 md:p-6">
           <CloudChart data={cloudData} />
         </div>
       </section>
 
       {/* Wind Speed Trends */}
-      <section className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl border-4 border-slate-50 relative overflow-hidden">
-        <div className="absolute -top-6 left-8 bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-2 rounded-2xl font-bold shadow-lg transform -rotate-3 flex items-center gap-2">
-          <Wind size={18} /> Wind Speed Trends
+      <section className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
+        <div className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 md:px-8 py-4 md:py-6 flex items-center gap-3">
+          <Wind size={24} />
+          <h2 className="text-xl md:text-2xl font-bold">Wind Speed Trends</h2>
         </div>
-
-        <div className="h-96 w-full mt-8">
+        <div className="h-80 md:h-96 p-4 md:p-6">
           <WindChart data={windData} />
         </div>
       </section>
 
       {/* Precipitation Forecast */}
-      <section className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl border-4 border-slate-50 relative overflow-hidden">
-        <div className="absolute -top-6 left-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-2xl font-bold shadow-lg transform -rotate-3 flex items-center gap-2">
-          <Zap size={18} /> Rain Probability
+      <section className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
+        <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 md:px-8 py-4 md:py-6 flex items-center gap-3">
+          <Zap size={24} />
+          <h2 className="text-xl md:text-2xl font-bold">Rain Probability</h2>
         </div>
-
-        <div className="h-96 w-full mt-8">
+        <div className="h-80 md:h-96 p-4 md:p-6">
           <RainChart data={rainData} />
         </div>
       </section>
