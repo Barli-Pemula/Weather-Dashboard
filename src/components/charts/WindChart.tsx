@@ -18,14 +18,21 @@ interface WindChartProps {
 }
 
 export default function WindChart({ data }: WindChartProps) {
+  const customTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-lg border border-slate-200">
+          <p className="font-semibold text-slate-900">{payload[0].payload.day}</p>
+          <p className="text-sm font-medium text-cyan-600">speed: {payload[0].value} km/h</p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
-    <div className="w-full h-full flex flex-col">
-      <div className="px-4 pt-4 pb-2">
-        <h3 className="text-lg font-bold text-slate-700">💨 Wind Speed</h3>
-      </div>
-      <div className="flex-1">
-      <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+    <ResponsiveContainer width="100%" height="100%">
+      <LineChart data={data} margin={{ top: 20, right: 10, left: -20, bottom: 0 }}>
         <defs>
           <linearGradient id="windGradient" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#0ea5e9" stopOpacity={0.4} />
@@ -46,13 +53,7 @@ export default function WindChart({ data }: WindChartProps) {
           tick={{ fill: "#cbd5e1", fontSize: 12 }}
           label={{ value: "km/h", angle: -90, position: "insideLeft" }}
         />
-        <Tooltip
-          contentStyle={{
-            borderRadius: "1rem",
-            border: "none",
-            boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)",
-          }}
-        />
+        <Tooltip content={customTooltip} />
         <Line
           type="monotone"
           dataKey="speed"
@@ -65,7 +66,5 @@ export default function WindChart({ data }: WindChartProps) {
         />
       </LineChart>
     </ResponsiveContainer>
-      </div>
-    </div>
   );
 }

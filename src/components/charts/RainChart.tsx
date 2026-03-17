@@ -18,14 +18,21 @@ interface RainChartProps {
 }
 
 export default function RainChart({ data }: RainChartProps) {
+  const customTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-lg border border-slate-200">
+          <p className="font-semibold text-slate-900">{payload[0].payload.day}</p>
+          <p className="text-sm font-medium text-blue-600">probability: {payload[0].value}%</p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
-    <div className="w-full h-full flex flex-col">
-      <div className="px-4 pt-4 pb-2">
-        <h3 className="text-lg font-bold text-slate-700">🌧️ Rainfall Probability</h3>
-      </div>
-      <div className="flex-1">
-      <ResponsiveContainer width="100%" height="100%">
-      <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+    <ResponsiveContainer width="100%" height="100%">
+      <BarChart data={data} margin={{ top: 20, right: 10, left: -20, bottom: 0 }}>
         <defs>
           <linearGradient id="rainGradient" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#3b82f6" stopOpacity={1} />
@@ -46,17 +53,9 @@ export default function RainChart({ data }: RainChartProps) {
           tick={{ fill: "#cbd5e1", fontSize: 12 }}
           label={{ value: "%", angle: -90, position: "insideLeft" }}
         />
-        <Tooltip
-          contentStyle={{
-            borderRadius: "1rem",
-            border: "none",
-            boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)",
-          }}
-        />
+        <Tooltip content={customTooltip} />
         <Bar dataKey="probability" fill="url(#rainGradient)" radius={[12, 12, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
-      </div>
-    </div>
   );
 }
