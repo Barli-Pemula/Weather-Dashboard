@@ -1,7 +1,20 @@
 import type { Metadata } from "next";
+import { Bricolage_Grotesque, Manrope } from "next/font/google";
 import Navigation from "@/components/ui/Navigation";
 import { WeatherDoodleBg } from "@/components/ui/WeatherDoodleBg";
 import "./globals.css";
+
+const bodyFont = Manrope({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const displayFont = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Lively Weather Dashboard — Experience Weather Beautifully",
@@ -34,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className="min-h-screen bg-gradient-to-br from-frost via-white to-slate-100 text-slate-900 font-sans relative overflow-x-hidden"
+        className={`${bodyFont.variable} ${displayFont.variable} min-h-screen bg-gradient-to-br from-frost via-white to-slate-100 text-slate-900 font-sans relative overflow-x-hidden`}
       >
         {/* Animated smooth background doodles */}
         <WeatherDoodleBg />
@@ -44,11 +57,11 @@ export default function RootLayout({
           {/* Header section with branding */}
           <header className="pt-8 px-6 max-w-5xl mx-auto w-full mb-8">
             <div className="text-center space-y-2">
-              <h1 className="text-5xl md:text-6xl font-black tracking-tighter text-slate-900 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-cyan-500 to-emerald-500">
+              <h1 className="text-5xl md:text-6xl font-display font-extrabold tracking-[-0.03em] text-slate-900 bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500">
                 Weather Studio
               </h1>
-              <p className="text-slate-500 font-medium tracking-wide uppercase text-xs">
-                ☀️ Real Data • 🎨 Beautiful Design • 📊 Smart Insights
+              <p className="text-slate-600 font-semibold tracking-[0.22em] uppercase text-[11px]">
+                Real Data • Atmospheric Design • Smart Insights
               </p>
             </div>
           </header>

@@ -12,8 +12,8 @@ const config: Config = {
         'storm': '#0f172a',
       },
       fontFamily: {
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
-        'display': ['Space Grotesk', 'sans-serif'],
+        'sans': ['var(--font-body)', 'system-ui', 'sans-serif'],
+        'display': ['var(--font-display)', 'sans-serif'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

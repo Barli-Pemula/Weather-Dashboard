@@ -1,6 +1,6 @@
 import { getWeatherData, getWeatherIcon, getWeatherDescription } from "@/lib/api";
 import { getTempColor, getTempGradient, formatTemp, formatWindSpeed } from "@/lib/utils";
-import { Wind, Droplets, Eye, Gauge } from "lucide-react";
+import { CloudRain, Droplets, Eye, Wind } from "lucide-react";
 
 export default async function HomePage() {
   const data = await getWeatherData();
@@ -15,7 +15,7 @@ export default async function HomePage() {
 
   const tempColors = getTempColor(currentTemp);
   const gradientBg = getTempGradient(currentTemp);
-  const { emoji: weatherEmoji, color: weatherColor } = getWeatherIcon(code);
+  const { emoji: weatherEmoji } = getWeatherIcon(code);
   const weatherDesc = getWeatherDescription(code);
 
   return (
@@ -57,28 +57,28 @@ export default async function HomePage() {
         <div className="w-full mt-6 md:mt-8 px-4 md:px-0 grid grid-cols-2 gap-3 md:gap-4 md:absolute md:bottom-8 md:left-8 md:right-8">
           {/* Wind */}
           <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-xl md:rounded-2xl p-3 md:p-4 flex flex-col items-center justify-center transform -rotate-2 hover:rotate-0 transition-all duration-300 hover:shadow-xl">
-            <Wind className="text-blue-500 mb-1 md:mb-2" size={24} />
+            <Wind className="text-blue-500 mb-1 md:mb-2" size={24} strokeWidth={2.4} />
             <div className={`text-lg md:text-2xl font-black ${tempColors.text}`}>{formatWindSpeed(wind)}</div>
             <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-0.5 md:mt-1">Wind</div>
           </div>
 
           {/* Humidity */}
           <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-xl md:rounded-2xl p-3 md:p-4 flex flex-col items-center justify-center transform rotate-1 hover:rotate-0 transition-all duration-300 hover:shadow-xl">
-            <Droplets className="text-cyan-500 mb-1 md:mb-2" size={24} />
+            <Droplets className="text-cyan-500 mb-1 md:mb-2" size={24} strokeWidth={2.4} />
             <div className={`text-lg md:text-2xl font-black text-cyan-600`}>{formatTemp(humidity)}</div>
             <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-0.5 md:mt-1">Humidity</div>
           </div>
 
           {/* Precipitation */}
           <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-xl md:rounded-2xl p-3 md:p-4 flex flex-col items-center justify-center transform -rotate-1 hover:rotate-0 transition-all duration-300 hover:shadow-xl">
-            <Gauge className="text-emerald-500 mb-1 md:mb-2" size={24} />
+            <CloudRain className="text-emerald-500 mb-1 md:mb-2" size={24} strokeWidth={2.4} />
             <div className={`text-lg md:text-2xl font-black text-emerald-600`}>{formatTemp(precipitation)}</div>
             <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-0.5 md:mt-1">Rain</div>
           </div>
 
           {/* Visibility (simulated) */}
           <div className="bg-white/80 backdrop-blur-md shadow-lg rounded-xl md:rounded-2xl p-3 md:p-4 flex flex-col items-center justify-center transform rotate-2 hover:rotate-0 transition-all duration-300 hover:shadow-xl">
-            <Eye className="text-purple-500 mb-1 md:mb-2" size={24} />
+            <Eye className="text-purple-500 mb-1 md:mb-2" size={24} strokeWidth={2.4} />
             <div className={`text-lg md:text-2xl font-black text-purple-600`}>10</div>
             <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-0.5 md:mt-1">View</div>
           </div>

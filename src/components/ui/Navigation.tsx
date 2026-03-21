@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Cloud, Sun, BarChart3 } from "lucide-react";
+import { BarChart3, CloudSun, House } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Navigation() {
@@ -25,7 +25,7 @@ export default function Navigation() {
           )}
           title="Current Weather"
         >
-          <Sun size={28} strokeWidth={2.5} />
+          <House size={28} strokeWidth={isActive("/") ? 2.8 : 2.2} />
           {isActive("/") && (
             <div className="absolute inset-0 rounded-full border-2 border-blue-300 opacity-30 animate-pulse" />
           )}
@@ -42,7 +42,7 @@ export default function Navigation() {
           )}
           title="5-Day Forecast"
         >
-          <Cloud size={28} strokeWidth={2.5} />
+          <CloudSun size={28} strokeWidth={isActive("/forecast") ? 2.8 : 2.2} />
           {isActive("/forecast") && (
             <div className="absolute inset-0 rounded-full border-2 border-cyan-300 opacity-30 animate-pulse" />
           )}
@@ -59,7 +59,7 @@ export default function Navigation() {
           )}
           title="Advanced Statistics"
         >
-          <BarChart3 size={28} strokeWidth={2.5} />
+          <BarChart3 size={28} strokeWidth={isActive("/stats") ? 2.8 : 2.2} />
           {isActive("/stats") && (
             <div className="absolute inset-0 rounded-full border-2 border-purple-300 opacity-30 animate-pulse" />
           )}

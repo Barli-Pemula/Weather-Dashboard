@@ -23,17 +23,31 @@ interface ForecastChartProps {
   variant?: "area" | "line";
 }
 
+type ForecastTooltipItem = {
+  color?: string;
+  name?: string;
+  value?: number;
+  payload?: { day: string };
+};
+
+type ForecastTooltipProps = {
+  active?: boolean;
+  payload?: ForecastTooltipItem[];
+};
+
 export default function ForecastChart({ data, variant = "area" }: ForecastChartProps) {
   const chartMargin = { top: 20, right: 10, left: -20, bottom: 0 };
 
-  const customTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
+  const customTooltip = ({ active, payload }: ForecastTooltipProps) => {
+    const first = payload?.[0];
+
+    if (active && first && payload) {
       return (
         <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg border border-slate-200">
-          <p className="font-semibold text-slate-900">{payload[0].payload.day}</p>
-          {payload.map((entry: any, idx: number) => (
+          <p className="font-semibold text-slate-900">{first.payload?.day ?? "N/A"}</p>
+          {payload.map((entry, idx) => (
             <p key={idx} style={{ color: entry.color }} className="text-sm font-medium">
-              {entry.name}: {entry.value}°
+              {entry.name}: {entry.value ?? 0}°
             </p>
           ))}
         </div>

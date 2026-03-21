@@ -2,7 +2,7 @@ import { getWeatherData } from "@/lib/api";
 import CloudChart from "@/components/charts/CloudChart";
 import WindChart from "@/components/charts/WindChart";
 import RainChart from "@/components/charts/RainChart";
-import { Cloud, Zap, Wind, TrendingUp } from "lucide-react";
+import { Cloud, CloudRain, TrendingUp, Wind } from "lucide-react";
 
 export default async function StatsPage() {
   const data = await getWeatherData();
@@ -100,7 +100,7 @@ export default async function StatsPage() {
       {/* Cloud Cover Analysis */}
       <section className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
         <div className="bg-gradient-to-r from-slate-600 to-slate-700 text-white px-6 md:px-8 py-4 md:py-6 flex items-center gap-3">
-          <Cloud size={24} />
+          <Cloud size={24} strokeWidth={2.3} />
           <h2 className="text-xl md:text-2xl font-bold">Cloud Coverage</h2>
         </div>
         <div className="h-80 md:h-96 p-4 md:p-6">
@@ -111,7 +111,7 @@ export default async function StatsPage() {
       {/* Wind Speed Trends */}
       <section className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
         <div className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 md:px-8 py-4 md:py-6 flex items-center gap-3">
-          <Wind size={24} />
+          <Wind size={24} strokeWidth={2.3} />
           <h2 className="text-xl md:text-2xl font-bold">Wind Speed Trends</h2>
         </div>
         <div className="h-80 md:h-96 p-4 md:p-6">
@@ -122,7 +122,7 @@ export default async function StatsPage() {
       {/* Precipitation Forecast */}
       <section className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
         <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 md:px-8 py-4 md:py-6 flex items-center gap-3">
-          <Zap size={24} />
+          <CloudRain size={24} strokeWidth={2.3} />
           <h2 className="text-xl md:text-2xl font-bold">Rain Probability</h2>
         </div>
         <div className="h-80 md:h-96 p-4 md:p-6">
@@ -133,7 +133,7 @@ export default async function StatsPage() {
       {/* Summary Insights */}
       <section className="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 rounded-3xl p-8 border-2 border-purple-200 shadow-lg">
         <h3 className="text-2xl font-black text-slate-900 mb-6 flex items-center gap-2">
-          <TrendingUp size={28} className="text-purple-600" />
+          <TrendingUp size={28} className="text-purple-600" strokeWidth={2.4} />
           Key Insights
         </h3>
 

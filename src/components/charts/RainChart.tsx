@@ -17,13 +17,20 @@ interface RainChartProps {
   }>;
 }
 
+type RainTooltipProps = {
+  active?: boolean;
+  payload?: Array<{ value?: number; payload?: { day: string } }>;
+};
+
 export default function RainChart({ data }: RainChartProps) {
-  const customTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
+  const customTooltip = ({ active, payload }: RainTooltipProps) => {
+    const first = payload?.[0];
+
+    if (active && first) {
       return (
         <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-lg border border-slate-200">
-          <p className="font-semibold text-slate-900">{payload[0].payload.day}</p>
-          <p className="text-sm font-medium text-blue-600">probability: {payload[0].value}%</p>
+          <p className="font-semibold text-slate-900">{first.payload?.day ?? "N/A"}</p>
+          <p className="text-sm font-medium text-blue-600">probability: {first.value ?? 0}%</p>
         </div>
       );
     }

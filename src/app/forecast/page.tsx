@@ -108,19 +108,19 @@ export default async function ForecastPage() {
                     <div className="hidden md:flex gap-4 ml-6">
                       {/* Precipitation */}
                       <div className="flex flex-col items-center justify-center bg-slate-100/50 rounded-lg p-3 min-w-max">
-                        <Droplets size={20} className="text-blue-500 mb-1" />
+                        <Droplets size={20} className="text-blue-500 mb-1" strokeWidth={2.2} />
                         <p className="text-xs font-bold text-slate-600">{forecast.precip}%</p>
                       </div>
 
                       {/* Wind */}
                       <div className="flex flex-col items-center justify-center bg-slate-100/50 rounded-lg p-3 min-w-max">
-                        <Wind size={20} className="text-cyan-500 mb-1" />
+                        <Wind size={20} className="text-cyan-500 mb-1" strokeWidth={2.2} />
                         <p className="text-xs font-bold text-slate-600">{forecast.wind} km/h</p>
                       </div>
 
                       {/* Cloud cover */}
                       <div className="flex flex-col items-center justify-center bg-slate-100/50 rounded-lg p-3 min-w-max">
-                        <Cloud size={20} className="text-slate-400 mb-1" />
+                        <Cloud size={20} className="text-slate-400 mb-1" strokeWidth={2.2} />
                         <p className="text-xs font-bold text-slate-600">{forecast.cloud}%</p>
                       </div>
                     </div>
@@ -129,7 +129,7 @@ export default async function ForecastPage() {
                   {/* Today badge */}
                   {isToday && (
                     <div className="md:hidden flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-full font-bold text-sm">
-                      <Zap size={16} />
+                      <Zap size={16} strokeWidth={2.5} />
                       Current
                     </div>
                   )}
@@ -138,15 +138,15 @@ export default async function ForecastPage() {
                 {/* Mobile weather details row */}
                 <div className="md:hidden flex gap-3 mt-4 pt-4 border-t border-slate-200">
                   <div className="flex items-center gap-2">
-                    <Droplets size={16} className="text-blue-500" />
+                    <Droplets size={16} className="text-blue-500" strokeWidth={2.2} />
                     <span className="text-xs font-bold text-slate-600">{forecast.precip}%</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Wind size={16} className="text-cyan-500" />
+                    <Wind size={16} className="text-cyan-500" strokeWidth={2.2} />
                     <span className="text-xs font-bold text-slate-600">{forecast.wind} km/h</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Cloud size={16} className="text-slate-400" />
+                    <Cloud size={16} className="text-slate-400" strokeWidth={2.2} />
                     <span className="text-xs font-bold text-slate-600">{forecast.cloud}%</span>
                   </div>
                 </div>

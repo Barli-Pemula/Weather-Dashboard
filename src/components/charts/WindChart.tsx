@@ -17,13 +17,20 @@ interface WindChartProps {
   }>;
 }
 
+type WindTooltipProps = {
+  active?: boolean;
+  payload?: Array<{ value?: number; payload?: { day: string } }>;
+};
+
 export default function WindChart({ data }: WindChartProps) {
-  const customTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
+  const customTooltip = ({ active, payload }: WindTooltipProps) => {
+    const first = payload?.[0];
+
+    if (active && first) {
       return (
         <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-lg border border-slate-200">
-          <p className="font-semibold text-slate-900">{payload[0].payload.day}</p>
-          <p className="text-sm font-medium text-cyan-600">speed: {payload[0].value} km/h</p>
+          <p className="font-semibold text-slate-900">{first.payload?.day ?? "N/A"}</p>
+          <p className="text-sm font-medium text-cyan-600">speed: {first.value ?? 0} km/h</p>
         </div>
       );
     }
