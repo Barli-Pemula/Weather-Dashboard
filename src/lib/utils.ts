@@ -112,9 +112,9 @@ export function getPrecipDescription(probability: number): string {
 export function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
   return date.toLocaleDateString("en-US", {
-    weekday: "short",
     month: "short",
     day: "numeric",
+    timeZone: "Asia/Jakarta",
   });
 }
 
@@ -123,5 +123,5 @@ export function formatDate(dateStr: string): string {
  */
 export function getDayOfWeek(dateStr: string): string {
   const date = new Date(dateStr);
-  return date.toLocaleDateString("en-US", { weekday: "short" });
+  return date.toLocaleDateString("en-US", { weekday: "short", timeZone: "Asia/Jakarta" });
 }

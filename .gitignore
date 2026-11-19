@@ -35,3 +35,8 @@ yarn-error.log*
 
 # OS
 Thumbs.db
+
+# Local design verification artifacts
+shots/
+.taste-skill/
+*.tsbuildinfo

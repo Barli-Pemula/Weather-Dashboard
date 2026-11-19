@@ -1,176 +1,25 @@
+import type { Metadata } from "next";
 import { getWeatherData } from "@/lib/api";
+import { getDayOfWeek } from "@/lib/utils";
 import CloudChart from "@/components/charts/CloudChart";
 import WindChart from "@/components/charts/WindChart";
 import RainChart from "@/components/charts/RainChart";
-import { Cloud, CloudRain, TrendingUp, Wind } from "lucide-react";
-
+import { DataNote, PageHeading, SectionHeading } from "@/components/ui/WeatherUI";
+export const metadata: Metadata = { title: "Weather statistics" };
 export default async function StatsPage() {
   const data = await getWeatherData();
-
-  // Prepare data for cloud cover analysis
-  const cloudData = data.daily.time.slice(0, 7).map((date, idx) => ({
-    day: new Date(date).toLocaleDateString("en-US", { weekday: "short" }),
-    coverage: Math.round(data.daily.cloud_cover_max[idx]),
-  }));
-
-  // Prepare data for wind speed trends
-  const windData = data.daily.time.slice(0, 7).map((date, idx) => ({
-    day: new Date(date).toLocaleDateString("en-US", { weekday: "short" }),
-    speed: Math.round(data.daily.wind_speed_10m_max[idx]),
-  }));
-
-  // Prepare rain probability data
-  const rainData = data.daily.time.slice(0, 7).map((date, idx) => ({
-    day: new Date(date).toLocaleDateString("en-US", { weekday: "short" }),
-    probability: Math.round(data.daily.precipitation_probability_max[idx]),
-  }));
-
-  return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-      {/* Page Header */}
-      <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white/60 backdrop-blur-md rounded-3xl p-8 shadow-sm border-2 border-purple-100">
-        <div>
-          <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-2">
-            Advanced Statistics
-          </h1>
-          <p className="text-slate-500 font-medium">Deep dive into weather data and patterns</p>
-        </div>
-        <div className="text-4xl">📊</div>
-      </header>
-
-      {/* Top metrics cards */}
-      <section className="grid md:grid-cols-4 gap-4">
-        {/* Average Temperature */}
-        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 border-2 border-orange-200 shadow-md hover:shadow-lg transition-all">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-xs uppercase tracking-widest font-bold text-slate-600">Avg Temperature</p>
-            <span className="text-2xl">🌡️</span>
-          </div>
-          <p className="text-4xl font-black text-orange-600 mb-2">
-            {Math.round(
-              (Math.max(...data.daily.temperature_2m_max.slice(0, 7)) +
-                Math.min(...data.daily.temperature_2m_min.slice(0, 7))) /
-                2
-            )}
-            °
-          </p>
-          <p className="text-xs text-slate-600">This week</p>
-        </div>
-
-        {/* Max Wind Speed */}
-        <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-6 border-2 border-cyan-200 shadow-md hover:shadow-lg transition-all">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-xs uppercase tracking-widest font-bold text-slate-600">Max Wind</p>
-            <span className="text-2xl">💨</span>
-          </div>
-          <p className="text-4xl font-black text-cyan-600 mb-2">
-            {Math.max(...data.daily.wind_speed_10m_max.slice(0, 7))}
-          </p>
-          <p className="text-xs text-slate-600">km/h</p>
-        </div>
-
-        {/* Avg Rain Chance */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-200 shadow-md hover:shadow-lg transition-all">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-xs uppercase tracking-widest font-bold text-slate-600">Avg Rain</p>
-            <span className="text-2xl">🌧️</span>
-          </div>
-          <p className="text-4xl font-black text-blue-600 mb-2">
-            {Math.round(
-              data.daily.precipitation_probability_max.slice(0, 7).reduce((a, b) => a + b, 0) / 7
-            )}
-            %
-          </p>
-          <p className="text-xs text-slate-600">Probability</p>
-        </div>
-
-        {/* Avg Cloud Cover */}
-        <div className="bg-gradient-to-br from-slate-50 to-zinc-50 rounded-2xl p-6 border-2 border-slate-200 shadow-md hover:shadow-lg transition-all">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-xs uppercase tracking-widest font-bold text-slate-600">Avg Cloud</p>
-            <span className="text-2xl">☁️</span>
-          </div>
-          <p className="text-4xl font-black text-slate-600 mb-2">
-            {Math.round(data.daily.cloud_cover_max.slice(0, 7).reduce((a, b) => a + b, 0) / 7)}%
-          </p>
-          <p className="text-xs text-slate-600">Coverage</p>
-        </div>
-      </section>
-
-      {/* Cloud Cover Analysis */}
-      <section className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
-        <div className="bg-gradient-to-r from-slate-600 to-slate-700 text-white px-6 md:px-8 py-4 md:py-6 flex items-center gap-3">
-          <Cloud size={24} strokeWidth={2.3} />
-          <h2 className="text-xl md:text-2xl font-bold">Cloud Coverage</h2>
-        </div>
-        <div className="h-80 md:h-96 p-4 md:p-6">
-          <CloudChart data={cloudData} />
-        </div>
-      </section>
-
-      {/* Wind Speed Trends */}
-      <section className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
-        <div className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 md:px-8 py-4 md:py-6 flex items-center gap-3">
-          <Wind size={24} strokeWidth={2.3} />
-          <h2 className="text-xl md:text-2xl font-bold">Wind Speed Trends</h2>
-        </div>
-        <div className="h-80 md:h-96 p-4 md:p-6">
-          <WindChart data={windData} />
-        </div>
-      </section>
-
-      {/* Precipitation Forecast */}
-      <section className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
-        <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 md:px-8 py-4 md:py-6 flex items-center gap-3">
-          <CloudRain size={24} strokeWidth={2.3} />
-          <h2 className="text-xl md:text-2xl font-bold">Rain Probability</h2>
-        </div>
-        <div className="h-80 md:h-96 p-4 md:p-6">
-          <RainChart data={rainData} />
-        </div>
-      </section>
-
-      {/* Summary Insights */}
-      <section className="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 rounded-3xl p-8 border-2 border-purple-200 shadow-lg">
-        <h3 className="text-2xl font-black text-slate-900 mb-6 flex items-center gap-2">
-          <TrendingUp size={28} className="text-purple-600" strokeWidth={2.4} />
-          Key Insights
-        </h3>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md">
-            <p className="text-sm uppercase tracking-widest font-bold text-slate-600 mb-3">Trend</p>
-            <p className="text-lg font-bold text-slate-900 mb-2">Temperature Stability</p>
-            <p className="text-sm text-slate-600">
-              Temperatures remain stable with moderate fluctuations, typical for this season. No extreme variations expected.
-            </p>
-          </div>
-
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md">
-            <p className="text-sm uppercase tracking-widest font-bold text-slate-600 mb-3">Alert</p>
-            <p className="text-lg font-bold text-slate-900 mb-2">Wind Advisory</p>
-            <p className="text-sm text-slate-600">
-              Moderate wind speeds detected. Exercise caution for outdoor activities, especially in elevated areas.
-            </p>
-          </div>
-
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md">
-            <p className="text-sm uppercase tracking-widest font-bold text-slate-600 mb-3">Pattern</p>
-            <p className="text-lg font-bold text-slate-900 mb-2">Cloud Coverage</p>
-            <p className="text-sm text-slate-600">
-              Cloud cover varies throughout the week. Mid-week shows higher cloud coverage, while weekends appear clearer.
-            </p>
-          </div>
-
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md">
-            <p className="text-sm uppercase tracking-widest font-bold text-slate-600 mb-3">Forecast</p>
-            <p className="text-lg font-bold text-slate-900 mb-2">Best Weather Days</p>
-            <p className="text-sm text-slate-600">
-              Friday through Sunday show optimal conditions for outdoor activities. Plan accordingly for best experience.
-            </p>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+  const d = data.daily;
+  const average = (values: number[]) => Math.round(values.reduce((a, b) => a + b, 0) / values.length);
+  const metrics = [
+    { label: "Mean daily high", value: average(d.temperature_2m_max) + "°", unit: "C" },
+    { label: "Peak wind speed", value: Math.round(Math.max(...d.wind_speed_10m_max)), unit: "km/h" },
+    { label: "Mean rain probability", value: average(d.precipitation_probability_max), unit: "%" },
+    { label: "Mean daily peak cloud", value: average(d.cloud_cover_max), unit: "%" },
+  ];
+  return <><PageHeading title="Weather, in perspective" description="The patterns behind Jakarta’s seven-day forecast." date={d.time[0]} />
+    <section className="metrics-strip stats-metrics" aria-label="Weekly statistics">{metrics.map(m => <div className="metric" key={m.label}><p className="metric-label">{m.label}</p><p className="metric-value">{m.value}<small>{m.unit}</small></p><p className="metric-note">Next 7 days</p></div>)}</section>
+    <div className="stats-grid"><section className="panel"><SectionHeading title="Rain probability" detail="Daily maximum · %" /><div className="chart-frame"><RainChart data={d.time.map((date, i) => ({ day: getDayOfWeek(date), probability: d.precipitation_probability_max[i] }))} /></div></section>
+    <section className="panel"><SectionHeading title="Wind speed" detail="Daily maximum · km/h" /><div className="chart-frame"><WindChart data={d.time.map((date, i) => ({ day: getDayOfWeek(date), speed: d.wind_speed_10m_max[i] }))} /></div></section>
+    <section className="panel"><SectionHeading title="Cloud cover" detail="Daily maximum · %" /><div className="chart-frame"><CloudChart data={d.time.map((date, i) => ({ day: getDayOfWeek(date), coverage: d.cloud_cover_max[i] }))} /></div></section>
+    <section className="reading-panel"><p className="eyebrow">Reading the forecast</p><h2>A probability, not a promise.</h2><p>Rain probability describes the chance of precipitation. It does not describe how much rain will fall.</p><dl><div><dt>Rain & cloud</dt><dd>Daily maximum percentages</dd></div><div><dt>Wind speed</dt><dd>Daily maximum at 10 m</dd></div><div><dt>Forecast horizon</dt><dd>7 days, in Jakarta local time</dd></div></dl></section></div><DataNote data={data} /></>;
 }
